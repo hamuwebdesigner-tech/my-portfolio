@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abeeth Rahuman | Professional Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           1. RESET & BASE STYLES
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Sleek, deep dark background gradient */
+            background: linear-gradient(135deg, #0f1115 0%, #1a1d24 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* ==========================================================================
+           2. CARD CONTAINER STYLES
+           ========================================================================== */
+        .portfolio-card {
+            background-color: #161920;
+            width: 100%;
+            max-width: 420px; /* Limits the card width on larger screens */
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            
+            /* Subtle border for a crisp look in dark mode */
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            
+            /* Elegant, soft drop shadow */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            
+            /* Smooth transition for the hover effect */
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+
+        /* Hover Effect: Card lifts up, shadow deepens, and border glows slightly */
+        .portfolio-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            border-color: rgba(212, 175, 55, 0.3); /* Subtle gold tint on hover */
+        }
+
+        /* ==========================================================================
+           3. PROFILE CARD CONTENT
+           ========================================================================== */
+        
+        /* Decorative Architectural Line/Icon Placeholder */
+        .card-accent {
+            width: 40px;
+            height: 4px;
+            background: linear-gradient(90deg, #c5a880, #e5c158); /* Elegant gold/bronze */
+            margin: 0 auto 24px auto;
+            border-radius: 2px;
+        }
+
+        /* Name Styles */
+        .name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        /* Profession Styles */
+        .profession {
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #c5a880; /* Elegant gold accent */
+            margin-bottom: 4px;
+        }
+
+        /* Company Styles */
+        .company {
+            font-size: 0.9rem;
+            color: #94a3b8; /* Muted gray text */
+            font-weight: 400;
+            margin-bottom: 24px;
+        }
+
+        /* Divider Line */
+        .divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+            margin-bottom: 24px;
+        }
+
+        /* Bio/Description Styles */
+        .description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #cbd5e1;
+            margin-bottom: 32px;
+            font-weight: 300;
+        }
+
+        /* ==========================================================================
+           4. CALL TO ACTION (BUTTON) STYLES
+           ========================================================================== */
+        .contact-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 14px 0;
+            background: linear-gradient(135deg, #c5a880 0%, #a38558 100%);
+            color: #0f1115; /* Dark text for contrast */
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            letter-spacing: 0.5px;
+            
+            /* Smooth transition for button hover */
+            transition: opacity 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        /* Button Hover Effects */
+        .contact-btn:hover {
+            opacity: 0.95;
+            box-shadow: 0 8px 20px rgba(197, 168, 128, 0.25);
+        }
+
+        /* Button Click Effect */
+        .contact-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* ==========================================================================
+           5. RESPONSIVE DESIGN (MOBILE OPTIMIZATION)
+           ========================================================================== */
+        @media (max-width: 480px) {
+            .portfolio-card {
+                padding: 30px 20px; /* Reduced padding on small screens */
+            }
+            
+            .name {
+                font-size: 1.6rem;
+            }
+            
+            .profession {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="portfolio-card">
+        
+        <div class="card-accent"></div>
+        
+        <h1 class="name">Abeeth Rahuman</h1>
+        <p class="profession">Professional Architect</p>
+        <p class="company">Prompt Supply</p>
+        
+        <div class="divider"></div>
+        
+        <p class="description">
+            Crafting sustainable, innovative, and functional spaces that seamlessly blend modern aesthetics with structural integrity. Dedicated to turning visionary concepts into architectural realities.
+        </p>
+        
+        <a href="mailto:your-email@example.com" class="contact-btn">Get In Touch</a>
+        
+    </div>
+
+</body>
+</html>
