@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdul Rahuman | Senior Architect & Design Consultant</title>
+    <!-- Embedded Google Fonts & FontAwesome CDN -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- BRANDING DESIGN VARIABLES --- */
+        :root {
+            --bg-deep: #0a0a0b;
+            --bg-surface: #121215;
+            --bg-card: #1a1a1f;
+            --gold-primary: #d4af37;
+            --gold-gradient: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa7c11 100%);
+            --text-pure: #ffffff;
+            --text-body: #a5a5ab;
+            --font-display: 'Cinzel', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --easing-premium: cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-smooth: all 0.6s var(--easing-premium);
+        }
+
+        /* --- CORE CONFIGURATIONS --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-pure);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION MANIFESTO --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition-smooth);
+        }
+
+        header.scrolled {
+            background: rgba(10, 10, 11, 0.96);
+            padding: 18px 8%;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--gold-primary);
+            text-decoration: none;
+            letter-spacing: 4px;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: var(--text-pure);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: var(--transition-smooth);
+            position: relative;
+            opacity: 0.75;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold-gradient);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold-primary);
+            opacity: 1;
+        }
+
+        .menu-btn {
+            display: none;
+            color: var(--text-pure);
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+        /* --- HERO VIEWPORT OVERLAY --- */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 24px;
+            background: linear-gradient(rgba(10, 10, 11, 0.75), rgba(10, 10, 11, 0.95)), 
+                        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 5;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: 4.5rem;
+            letter-spacing: 8px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-weight: 600;
+            background: linear-gradient(180deg, #ffffff 0%, #e5e5e5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--gold-primary);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 45px;
+            font-weight: 300;
+        }
+
+        /* --- PREMIUM BUTTON DESIGN --- */
+        .btn-luxury {
+            display: inline-block;
+            padding: 16px 42px;
+            border: 1px solid var(--gold-primary);
+            color: var(--text-pure);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            font-weight: 600;
+            background: transparent;
+            position: relative;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .btn-luxury::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--gold-gradient);
+            transition: var(--transition-smooth);
+            z-index: -1;
+        }
+
+        .btn-luxury:hover::before {
+            width: 100%;
+        }
+
+        .btn-luxury:hover {
+            color: var(--bg-deep);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* --- GLOBAL LAYOUT REVEAL SCROLLS --- */
+        section {
+            padding: 140px 8%;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 1.2s var(--easing-premium), transform 1.2s var(--easing-premium);
+        }
+
+        section.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title-block {
+            text-align: center;
+            margin-bottom: 90px;
+        }
+
+        .section-title-block h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 25px;
+        }
+
+        .section-title-block h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 1px;
+            background: var(--gold-gradient);
+        }
+
+        /* --- ABOUT ARCHITECT --- */
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1.10fr 0.90fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .about-text-content h3 {
+            font-family: var(--font-display);
+            color: var(--gold-primary);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            line-height: 1.4;
+            font-weight: 400;
+        }
+
+        .about-text-content p {
+            color: var(--text-body);
+            margin-bottom: 24px;
+            font-size: 1.05rem;
+            font-weight: 300;
+        }
+
+        .metric-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(212, 175, 55, 0.15);
+            padding-top: 40px;
+        }
+
+        .metric-card h4 {
+            font-family: var(--font-display);
+            font-size: 2.6rem;
+            color: var(--gold-primary);
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .metric-card p {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-pure);
+        }
+
+        .about-showcase img {
+            width: 100%;
+            height: 540px;
+            object-fit: cover;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: -20px 20px 0px rgba(212, 175, 55, 0.03);
+        }
+
+        /* --- SKILLS MATRIX GRID --- */
+        .skills-container-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .skill-luxury-box {
+            background: var(--bg-surface);
+            border: 1px solid rgba(212, 175, 55, 0.06);
+            padding: 50px 30px;
+            text-align: center;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .skill-luxury-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid var(--gold-primary);
+            opacity: 0;
+            transition: var(--transition-smooth);
+            transform: scale(1.05);
+        }
+
+        .skill-luxury-box:hover::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .skill-luxury-box:hover {
+            transform: translateY(-5px);
+            background: var(--bg-card);
+        }
+
+        .skill-luxury-box i {
+            font-size: 2.5rem;
+            color: var(--gold-primary);
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .skill-luxury-box h3 {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* --- FEATURED PROJECTS MATRIX --- */
+        .portfolio-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 40px;
+        }
+
+        .portfolio-card {
+            position: relative;
+            overflow: hidden;
+            height: 480px;
+            border: 1px solid rgba(212, 175, 55, 0.08);
+        }
+
+        .portfolio-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s var(--easing-premium);
+        }
+
+        .portfolio-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 10, 11, 0.98) 20%, rgba(10, 10, 11, 0.1) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 45px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition-smooth);
+        }
+
+        .portfolio-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .portfolio-card:hover .portfolio-card-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .portfolio-card-overlay h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: var(--gold-primary);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .portfolio-card-overlay p {
+            font-size: 0.8rem;
+            color: var(--text-body);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- PREMIUM SERVICES CARDS --- */
+        .services-layout-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .service-luxury-card {
+            padding: 60px 45px;
+            background: var(--bg-surface);
+            border-bottom: 3px solid transparent;
+            transition: var(--transition-smooth);
+        }
+
+        .service-luxury-card:hover {
+            background: var(--bg-card);
+            border-bottom-color: var(--gold-primary);
+            transform: translateY(-8px);
+        }
+
+        .service-luxury-card .icon-frame {
+            font-size: 2.3rem;
+            color: var(--gold-primary);
+            margin-bottom: 35px;
+        }
+
+        .service-luxury-card h3 {
+            font-family: var(--font-display);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        .service-luxury-card p {
+            color: var(--text-body);
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        /* --- STRUCTURAL CONTACT CONFIG --- */
+        .contact-structural-wrapper {
+            display: grid;
+            grid-template-columns: 0.90fr 1.10fr;
+            gap: 70px;
+        }
+
+        .contact-nodes {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 45px;
+        }
+
+        .node-block {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .node-block i {
+            width: 55px;
+            height: 55px;
+            background: var(--bg-surface);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            color: var(--gold-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            border-radius: 50%;
+        }
+
+        .node-details h4 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-body);
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .node-details p {
+            font-size: 1.1rem;
+            color: var(--text-pure);
+            font-weight: 400;
+        }
+
+        .contact-form-container {
+            background: var(--bg-surface);
+            padding: 55px;
+            border: 1px solid rgba(212, 175, 55, 0.06);
+        }
+
+        .form-field {
+            margin-bottom: 25px;
+        }
+
+        .form-field input, 
+        .form-field textarea {
+            width: 100%;
+            padding: 18px;
+            background: var(--bg-deep);
+            border: 1px solid rgba(212, 175, 55, 0.12);
+            color: var(--text-pure);
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .form-field input:focus, 
+        .form-field textarea:focus {
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.08);
+        }
+
+        /* --- REFINED SYSTEM FOOTER --- */
+        footer {
+            background: #060607;
+            padding: 70px 8% 35px;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.06);
+        }
+
+        .footer-networks {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            margin-bottom: 40px;
+        }
+
+        .footer-networks a {
+            color: var(--text-body);
+            font-size: 1.3rem;
+            transition: var(--transition-smooth);
+        }
+
+        .footer-networks a:hover {
+            color: var(--gold-primary);
+            transform: translateY(-5px);
+        }
+
+        footer p {
+            color: var(--text-body);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- LAYOUT RESPONSIVE MEDIA BREAKPOINTS --- */
+        @media (max-width: 1120px) {
+            .about-layout, .contact-structural-wrapper {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            .hero h1 { font-size: 3.2rem; }
+            .about-showcase img { height: 440px; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn { display: block; }
+            .nav-links {
+                position: fixed;
+                top: -100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg-deep);
+                flex-direction: column;
+                align-items: center;
+                padding: 60px 0;
+                gap: 35px;
+                transition: var(--transition-smooth);
+                border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            }
+            .nav-links.active { top: 80px; }
+            .portfolio-matrix { grid-template-columns: 1fr; }
+            .metric-row { grid-template-columns: 1fr; gap: 35px; }
+            .contact-form-container { padding: 35px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PRIMARY HEADER ARCHITECTURE -->
+    <header id="navbar">
+        <a href="#" class="logo">AR CONSULTANTS</a>
+        <div class="menu-btn" id="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="navigation-menu">
+            <li><a href="#home" class="nav-anchor active">Home</a></li>
+            <li><a href="#about" class="nav-anchor">About</a></li>
+            <li><a href="#skills" class="nav-anchor">Skills</a></li>
+            <li><a href="#projects" class="nav-anchor">Projects</a></li>
+            <li><a href="#services" class="nav-anchor">Services</a></li>
+            <li><a href="#contact" class="nav-anchor">Contact</a></li>
+        </ul>
+    </header>
+
+    <!-- FULLSCREEN COVER HERO CANVAS -->
+    <section id="home" class="hero" style="opacity: 1; transform: none;">
+        <div class="hero-content">
+            <h1>Abdul Rahuman</h1>
+            <p>Senior Architect & Design Consultant</p>
+            <a href="#projects" class="btn-luxury">Explore Works</a>
+        </div>
+    </section>
+
+    <!-- PROFILE/ABOUT FRAMEWORK -->
+    <section id="about">
+        <div class="section-title-block">
+            <h2>About Me</h2>
+        </div>
+        <div class="about-layout">
+            <div class="about-text-content">
+                <h3>Orchestrating Premium Architectural Realities</h3>
+                <p>As a seasoned Senior Architect and Design Consultant, my practice is focused entirely on cross-pollinating avant-garde architectural structural lines with deeply layered interior curation.</p>
+                <p>Every assignment initiated is analyzed under fine geometric frameworks, functional resilience, and premium material palettes to translate standard site metrics into highly distinguished legacy structures.</p>
+                
+                <div class="metric-row">
+                    <div class="metric-card">
+                        <h4>12+</h4>
+                        <p>Years Practice</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4>180+</h4>
+                        <p>Elite Structures</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4>15</h4>
+                        <p>Global Honors</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-showcase">
+                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" alt="Bespoke Luxury Architecture Lounge Integration">
+            </div>
+        </div>
+    </section>
+
+    <!-- WORKFLOW SKILLSET SYSTEMS -->
+    <section id="skills">
+        <div class="section-title-block">
+            <h2>Expertise & Engine</h2>
+        </div>
+        <div class="skills-container-grid">
+            <div class="skill-luxury-box">
+                <i class="fas fa-drafting-compass"></i>
+                <h3>AutoCAD</h3>
+            </div>
+            <div class="skill-luxury-box">
+                <i class="fas fa-cubes"></i>
+                <h3>Revit</h3>
+            </div>
+            <div class="skill-luxury-box">
+                <i class="fas fa-layer-group"></i>
+                <h3>Sketchup</h3>
+            </div>
+            <div class="skill-luxury-box">
+                <i class="fas fa-vr-cardboard"></i>
+                <h3>3D Visualization</h3>
+            </div>
+            <div class="skill-luxury-box">
+                <i class="fas fa-couch"></i>
+                <h3>Interior Design</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- SIGNATURE WORKS FRAME GRID -->
+    <section id="projects">
+        <div class="section-title-block">
+            <h2>Featured Projects</h2>
+        </div>
+        <div class="portfolio-matrix">
+            <!-- Project Node 1: Luxury Designing Home -->
+            <div class="portfolio-card">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" alt="Luxury Residential Villa Structure Layout">
+                <div class="portfolio-card-overlay">
+                    <h3>The Zenith Residence</h3>
+                    <p>Luxury Designing Home | Completed</p>
+                </div>
+            </div>
+            <!-- Project Node 2: Commercial Architecture -->
+            <div class="portfolio-card">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Modern Minimalist Sky Atrium Corporate Tower">
+                <div class="portfolio-card-overlay">
+                    <h3>Aero-Corporate Complex</h3>
+                    <p>Modern Commercial Building | Concept</p>
+                </div>
+            </div>
+            <!-- Project Node 3: High End Luxury Interior -->
+            <div class="portfolio-card">
+                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80" alt="Premium Bespoke Executive Living Atrium Lounge">
+                <div class="portfolio-card-overlay">
+                    <h3>Onyx Penthouse Atrium</h3>
+                    <p>Bespoke Interior Design | Built Environment</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE STRATEGIC CONSULTING DISCIPLINES -->
+    <section id="services">
+        <div class="section-title-block">
+            <h2>Core Services</h2>
+        </div>
+        <div class="services-layout-grid">
+            <div class="service-luxury-card">
+                <div class="icon-frame"><i class="fas fa-compass"></i></div>
+                <h3>Architectural Planning</h3>
+                <p>Complete execution blueprints, zone detailing, building orientation metrics, and structural drafts aligned with world-class planning protocols.</p>
+            </div>
+            <div class="service-luxury-card">
+                <div class="icon-frame"><i class="fas fa-vector-square"></i></div>
+                <h3>Bespoke Interior Systems</h3>
+                <p>Strategic integration of tactile raw material science, ergonomic custom furniture blueprints, and custom-tuned programmatic illumination schemes.</p>
+            </div>
+            <div class="service-luxury-card">
+                <div class="icon-frame"><i class="fas fa-user-tie"></i></div>
+                <h3>Design Consultation</h3>
+                <p>Comprehensive feasibility screening, space optimization audits, structural design peer oversight, and aesthetic direction guidance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE CONTACT INTERACTION SYSTEM -->
+    <section id="contact">
+        <div class="section-title-block">
+            <h2>Acquire Engagement</h2>
+        </div>
+        <div class="contact-structural-wrapper">
+            <div class="contact-nodes">
+                <div class="node-block">
+                    <i class="fas fa-envelope"></i>
+                    <div class="node-details">
+                        <h4>Secure Correspondence</h4>
+                        <p>abdul.rahuman@example.com</p>
+                    </div>
+                </div>
+                <div class="node-block">
+                    <i class="fas fa-phone-alt"></i>
+                    <div class="node-details">
+                        <h4>Direct Liaison</h4>
+                        <p>+91 98765 43210</p>
+                    </div>
+                </div>
+                <div class="node-block">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="node-details">
+                        <h4>Studio Headquarters</h4>
+                        <p>Chennai, Tamil Nadu, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form-container">
+                <form id="luxeContactForm">
+                    <div class="form-field">
+                        <input type="text" placeholder="Client Name / Enterprise" required>
+                    </div>
+                    <div class="form-field">
+                        <input type="email" placeholder="Contact Email Address" required>
+                    </div>
+                    <div class="form-field">
+                        <textarea rows="5" placeholder="Strategic Brief of Structural Scope..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-luxury" style="width: 100%;">Transmit Engagement Intent</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECURE EMBEDDED SYSTEM FOOTER -->
+    <footer>
+        <div class="footer-networks">
+            <a href="#" target="_blank" aria-label="LinkedIn Corporate Profile Connect"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" target="_blank" aria-label="Instagram Selected Work Lookbook"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank" aria-label="Behance Architectural Project Breakdown"><i class="fab fa-behance"></i></a>
+            <a href="#" target="_blank" aria-label="Pinterest Space Curation Boards"><i class="fab fa-pinterest"></i></a>
+        </div>
+        <p>&copy; 2026 Abdul Rahuman. All Rights Reserved. Geometric Integrity & Luxury Spatial Curation.</p>
+    </footer>
+
+    <!-- INTERACTIVE LOGIC ENGINE -->
+    <script>
+        // --- TRANSLUCENT NAVBAR SCROLL BEHAVIOR ---
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 60) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // --- RESPONSIVE MOBILE ACCORDION OVERLAY PANEL ---
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const navigationMenu = document.getElementById('navigation-menu');
+
+        menuBtn.addEventListener('click', () => {
+            navigationMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-anchor').forEach(link => {
+            link.addEventListener('click', () => {
+                navigationMenu.classList.remove('active');
+            });
+        });
+
+        // --- INTERSECTION OBSERVER FOR IN-VIEW TRANSITIONS & LINK HIGHLIGHTING ---
+        const dynamicSections = document.querySelectorAll('section');
+        const anchorLinks = document.querySelectorAll('.nav-anchor');
+
+        const sectionObserverOptions = {
+            threshold: 0.12,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal');
+                    
+                    let contextID = entry.target.getAttribute('id');
+                    anchorLinks.forEach(item => {
+                        item.classList.remove('active');
+                        if (item.getAttribute('href') === `#${contextID}`) {
+                            item.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, sectionObserverOptions);
+
+        dynamicSections.forEach(section => {
+            revealObserver.observe(section);
+        });
+
+        // --- CONTACT DISPATCH SIMULATION ENGINE ---
+        document.getElementById('luxeContactForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            alert('Your structural parameters have been parsed securely. Abdul Rahuman\'s private office will follow up with scheduling assets shortly.');
+            event.target.reset();
+        });
+    </script>
+</body>
+</html>
