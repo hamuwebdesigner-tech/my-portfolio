@@ -1,249 +1,213 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GlowAI — Premium AI-Formulated Beauty & Skincare</title>
+    <title>BudgetPilot - Personal Finance Tracker</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Stylesheet -->
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <!-- Navigation Header -->
-    <header class="main-header">
-        <div class="nav-container">
-            <a href="#" class="logo">Glow<span>AI</span></a>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fa-solid fa-plane-departure logo-icon"></i>
+                <h2>Budget<span>Pilot</span></h2>
+            </div>
             
-            <nav class="nav-links" id="navMenu">
-                <a href="#home" class="nav-item active">Home</a>
-                <a href="#products" class="nav-item">Products</a>
-                <a href="#about" class="nav-item">About</a>
-                <a href="#contact" class="nav-item">Contact</a>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+                <a href="#" class="nav-item" id="export-btn"><i class="fa-solid fa-file-csv"></i> Export CSV</a>
             </nav>
 
-            <div class="header-actions">
-                <button class="icon-btn cart-toggle" id="cartOpenBtn" aria-label="Open Shopping Cart">
-                    <i class="fa-solid fa-shopping-bag"></i>
-                    <span class="cart-counter" id="cartCounter">0</span>
-                </button>
-                <button class="icon-btn mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle Mobile Menu">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
+            <div class="theme-toggle-container">
+                <span class="theme-label"><i class="fa-solid fa-moon"></i> Dark Mode</span>
+                <label class="switch">
+                    <input type="checkbox" id="theme-checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
             </div>
-        </div>
-    </header>
+        </aside>
 
-    <!-- Side Cart Drawer Panel -->
-    <div class="cart-drawer-overlay" id="cartOverlay"></div>
-    <aside class="cart-drawer" id="cartDrawer">
-        <div class="cart-drawer-header">
-            <h3>Your Selection</h3>
-            <button class="close-drawer-btn" id="cartCloseBtn"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        
-        <div class="cart-drawer-body" id="cartItemsContainer">
-            <!-- Dynamic Cart Items Rendered Here -->
-            <div class="empty-cart-state">
-                <i class="fa-solid fa-basket-shopping"></i>
-                <p>Your shopping bag is currently empty.</p>
-                <a href="#products" class="btn btn-secondary btn-sm" id="emptyCartShopBtn">Explore Products</a>
-            </div>
-        </div>
+        <!-- Main Dashboard Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="welcome-text">
+                    <h1>Financial Control Tower</h1>
+                    <p>Track, optimize, and pilot your wealth.</p>
+                </div>
+                <div class="date-display" id="current-date">October 24, 2026</div>
+            </header>
 
-        <div class="cart-drawer-footer">
-            <div class="cart-summary-row">
-                <span>Subtotal</span>
-                <span class="cart-subtotal-price" id="cartSubtotal">$0.00</span>
-            </div>
-            <p class="shipping-disclaimer">Taxes and carbon-neutral shipping computed at checkout.</p>
-            <button class="btn btn-primary btn-full">Secure Checkout</button>
-        </div>
-    </aside>
-
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero-section">
-            <div class="hero-container">
-                <div class="hero-text-content">
-                    <span class="hero-subtitle">The Intelligence of Clinical Beauty</span>
-                    <h1 class="hero-title">Skincare Engineered <br>by Neural Analysis</h1>
-                    <p class="hero-lead">We cross-reference global weather indicators, genetics, and biometric data to formulate microscopic, target-specific active serums customized just for your skin.</p>
-                    <div class="hero-btn-group">
-                        <a href="#products" class="btn btn-primary">Shop The Collection</a>
-                        <a href="#about" class="btn btn-secondary">Our Neural Lab</a>
+            <!-- Metrics Cards Grid -->
+            <section class="metrics-grid">
+                <div class="card balance-card">
+                    <div class="card-header">
+                        <span>Total Balance</span>
+                        <i class="fa-solid fa-wallet card-icon"></i>
                     </div>
+                    <h2 id="total-balance">$0.00</h2>
+                    <span class="card-trend text-success"><i class="fa-solid fa-arrow-up"></i> Active tracking</span>
                 </div>
-                <div class="hero-visual-frame">
-                    <div class="hero-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=1200&q=80" alt="GlowAI premium luxury skincare formulation" class="hero-hero-img">
-                        <div class="hero-glass-badge">
-                            <span class="badge-accent">99.4%</span>
-                            <span class="badge-label">Active Absorption Match</span>
-                        </div>
+
+                <div class="card income-card">
+                    <div class="card-header">
+                        <span>Total Income</span>
+                        <i class="fa-solid fa-arrow-trend-up card-icon text-success"></i>
                     </div>
+                    <h2 id="total-income" class="text-success">$0.00</h2>
+                    <span class="card-trend" id="weekly-income-summary">This Week: $0.00</span>
                 </div>
-            </div>
-        </section>
 
-        <!-- Brand Pillar Trust Stats -->
-        <section class="trust-pillars-section">
-            <div class="pillars-container">
-                <div class="pillar-card">
-                    <i class="fa-solid fa-dna"></i>
-                    <h4>Precision Biomatching</h4>
-                    <p>Ingredients matched directly against personal genetic skin hydration markers.</p>
-                </div>
-                <div class="pillar-card">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    <h4>Micro-Dosed Actives</h4>
-                    <p>Concentrated formulas engineered to avoid surface-level pore congestion.</p>
-                </div>
-                <div class="pillar-card">
-                    <i class="fa-solid fa-leaf"></i>
-                    <h4>Eco-Cert Clean Tech</h4>
-                    <p>100% cruelty-free, vegan biotechnological synthetics with zero parabens.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Product Showcase & Filter Section -->
-        <section id="products" class="products-section">
-            <div class="section-header">
-                <span class="section-tag">Clinical Formulations</span>
-                <h2 class="section-main-title">The Curated Molecular Range</h2>
-                <p class="section-subtext">Filter our current diagnostic collections to discover your target match.</p>
-
-                <!-- Search & Filters -->
-                <div class="control-panel">
-                    <div class="search-bar-wrapper">
-                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                        <input type="text" id="searchInput" placeholder="Search by name, active ingredient...">
+                <div class="card expense-card">
+                    <div class="card-header">
+                        <span>Total Expenses</span>
+                        <i class="fa-solid fa-arrow-trend-down card-icon text-danger"></i>
                     </div>
-                    
-                    <div class="filter-tabs">
-                        <button class="filter-tab active" data-filter="all">All Specialties</button>
-                        <button class="filter-tab" data-filter="skincare">Skincare</button>
-                        <button class="filter-tab" data-filter="makeup">Makeup</button>
-                        <button class="filter-tab" data-filter="haircare">Hair Care</button>
-                    </div>
+                    <h2 id="total-expenses" class="text-danger">$0.00</h2>
+                    <span class="card-trend" id="weekly-expense-summary">This Week: $0.00</span>
                 </div>
-            </div>
 
-            <!-- Product Cards Display Grid (At least 8 products populated) -->
-            <div class="products-grid" id="productsGrid">
-                <!-- Javascript will inject cards dynamically here -->
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="about-section">
-            <div class="about-container">
-                <div class="about-visual">
-                    <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1000&q=80" alt="GlowAI Clinical Beauty Research Lab" class="about-img">
-                </div>
-                <div class="about-text">
-                    <span class="section-tag">Scientific Method</span>
-                    <h2 class="section-main-title">Eliminating Guesswork <br>Through AI Metrics</h2>
-                    <p>Standard beauty brands create generic creams designed for a million users. GlowAI believes your skin is too dynamic for templates. Our algorithmic platform tracks localized humidity variables, environmental oxidative stressors, and your skin's biological pH index to build dynamic cosmetics.</p>
-                    <div class="about-metrics">
-                        <div class="metric-item">
-                            <span class="metric-num">32k+</span>
-                            <span class="metric-desc">Formulations Made</span>
-                        </div>
-                        <div class="metric-item">
-                            <span class="metric-num">98.9%</span>
-                            <span class="metric-desc">Satisfied Skin Metrics</span>
-                        </div>
+                <div class="card savings-card">
+                    <div class="card-header">
+                        <span>Net Savings</span>
+                        <i class="fa-solid fa-piggy-bank card-icon text-primary"></i>
                     </div>
+                    <h2 id="total-savings" class="text-primary">$0.00</h2>
+                    <span class="card-trend" id="savings-rate">Rate: 0%</span>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="contact-section">
-            <div class="contact-inner">
-                <div class="contact-meta">
-                    <h2>Connect with an AI Skin Concierge</h2>
-                    <p>Get in touch to receive personal diagnostic recommendations or order assistance from our expert consultants.</p>
-                    <div class="contact-info-list">
-                        <div class="info-row">
-                            <i class="fa-solid fa-envelope"></i>
-                            <span>concierge@glowai.com</span>
-                        </div>
-                        <div class="info-row">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <span>Flagship Atelier: Fifth Ave, NY</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form-wrapper">
-                    <form id="contactForm" class="contact-form">
-                        <div class="form-row">
+            <!-- Data Visualizations & Form Section -->
+            <section class="dashboard-middle">
+                <!-- Transaction Form Container -->
+                <div class="card action-card">
+                    <h3 id="form-title">Log New Transaction</h3>
+                    <form id="transaction-form">
+                        <input type="hidden" id="transaction-id">
+                        
+                        <div class="form-group-row">
                             <div class="form-group">
-                                <label for="formName">Full Name</label>
-                                <input type="text" id="formName" required placeholder="Adeline Sterling">
+                                <label for="type">Type</label>
+                                <select id="type" required>
+                                    <option value="expense">Expense</option>
+                                    <option value="income">Income</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Amount ($)</label>
+                                <input type="number" id="amount" step="0.01" min="0.01" placeholder="0.00" required>
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <label for="formEmail">Email Address</label>
-                            <input type="email" id="formEmail" required placeholder="adeline@example.com">
+                            <label for="description">Description</label>
+                            <input type="text" id="description" placeholder="e.g., Grocery Shopping" required>
                         </div>
-                        <div class="form-group">
-                            <label for="formMessage">Your Inquiry</label>
-                            <textarea id="formMessage" rows="5" required placeholder="What are your primary dermal goals?"></textarea>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <select id="category" required>
+                                    <option value="Food">Food</option>
+                                    <option value="Transport">Transport</option>
+                                    <option value="Shopping">Shopping</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Bills">Bills</option>
+                                    <option value="Education">Education</option>
+                                    <option value="Healthcare">Healthcare</option>
+                                    <option value="Salary">Salary</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Date</label>
+                                <input type="date" id="date" required>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-full">Submit Diagnostic Inquiry</button>
-                        <div class="form-feedback" id="formFeedback"></div>
+
+                        <div class="form-actions">
+                            <button type="button" id="cancel-edit-btn" class="btn btn-secondary hidden">Cancel</button>
+                            <button type="submit" class="btn btn-primary" id="submit-btn">Save Transaction</button>
+                        </div>
                     </form>
                 </div>
-            </div>
-        </section>
-    </main>
 
-    <!-- Professional Footer -->
-    <footer class="main-footer">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <a href="#" class="logo">Glow<span>AI</span></a>
-                <p class="brand-pitch">Hyper-personalized cosmetic science, driven by machine learning algorithms and clean, clinical biotechnology.</p>
-                <div class="social-links">
-                    <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="GlowAI Instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="GlowAI TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                    <a href="https://pinterest.com" target="_blank" rel="noopener" aria-label="GlowAI Pinterest"><i class="fa-brands fa-pinterest"></i></a>
-                    <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="GlowAI LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <!-- Charts Section -->
+                <div class="card charts-card">
+                    <div class="chart-tabs">
+                        <button class="chart-tab-btn active" data-chart="bar">Weekly Run-Rate</button>
+                        <button class="chart-tab-btn" data-chart="pie">Allocation Matrix</button>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="barChart"></canvas>
+                        <canvas id="pieChart" class="hidden"></canvas>
+                    </div>
                 </div>
-            </div>
-            <div class="footer-col">
-                <h5>Navigation</h5>
-                <ul class="footer-links">
-                    <li><a href="#home">Home Base</a></li>
-                    <li><a href="#products">Curated Diagnostic Set</a></li>
-                    <li><a href="#about">The Neural Lab</a></li>
-                    <li><a href="#contact">Concierge Care</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h5>Information</h5>
-                <ul class="footer-links">
-                    <li><a href="#">DNA Privacy Policy</a></li>
-                    <li><a href="#">Diagnostics Method</a></li>
-                    <li><a href="#">Sustainable Shipments</a></li>
-                    <li><a href="#">Product Exchanges</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 GlowAI Inc. All rights reserved. Created for Professional Developer Portfolio Showcase.</p>
-        </div>
-    </footer>
+            </section>
 
-    <!-- Script file link -->
+            <!-- Ledger/History Section -->
+            <section class="card ledger-card">
+                <div class="ledger-header">
+                    <h3>Transaction Ledger</h3>
+                    <div class="ledger-controls">
+                        <div class="search-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="search-input" placeholder="Search records...">
+                        </div>
+                        <select id="filter-category">
+                            <option value="all">All Categories</option>
+                            <option value="Food">Food</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Bills">Bills</option>
+                            <option value="Education">Education</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Salary">Salary</option>
+                        </select>
+                        <select id="filter-type">
+                            <option value="all">All Types</option>
+                            <option value="income">Income Only</option>
+                            <option value="expense">Expenses Only</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="ledger-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Type</th>
+                                <th class="text-right">Amount</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transaction-list">
+                            <!-- Dynamic Injection via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="empty-state" class="empty-state hidden">
+                    <i class="fa-solid fa-receipt"></i>
+                    <p>No transactions found matching your criteria.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Script File Hook -->
     <script src="script.js"></script>
 </body>
 </html>
